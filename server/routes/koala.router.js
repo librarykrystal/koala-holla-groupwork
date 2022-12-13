@@ -1,5 +1,5 @@
 const express = require('express');
-const koalaRouter = express.Router();
+const router = express.Router();
 const pg = require('pg');
 const Pool = pg.Pool;
 // DB CONNECTION
@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
 // POST
 //name    | gender | age | ready_to_transer | notes   
 router.post('/', (req, res) => {
-    const newSong = req.body;
+    const newKoala = req.body;
     const queryText = `
     INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
     VALUES ('${newKoala.name}', '${newKoala.gender}', '${newKoala.age}', '${newKoala.ready_to_transfer}',${newKoala.notes});
@@ -56,4 +56,6 @@ router.post('/', (req, res) => {
 
 // DELETE
 
-module.exports = koalaRouter;
+module.exports = router;
+
+
