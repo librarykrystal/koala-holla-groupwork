@@ -1,7 +1,7 @@
 {
   "name": "koalla_holla",
   "version": "1.0.0",
-  "description": "",
+  "description": "This must stop: --------------- ![Nevar again](https://i.makeagif.com/media/8-22-2014/GO_DT4.gif)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +10,15 @@
   "author": "@devjana",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/librarykrystal/koala-holla-jens.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/librarykrystal/koala-holla-jens/issues"
+  },
+  "homepage": "https://github.com/librarykrystal/koala-holla-jens#readme"
 }
