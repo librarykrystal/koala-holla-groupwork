@@ -52,7 +52,19 @@ router.post('/', (req, res) => {
 })
 
 // PUT
-
+router.put('/ready_to_transfer/:id', (req, res) => {
+    console.log('router.put id', req.params.id);
+    console.log('router.put body', req.body);
+    let queryText = `UPDATE "koalas" SET ready_to_transfer='true' WHERE id=${req.params.id};`;
+    pool.query(queryText)
+    .then((dbResponse) => {
+        console.log('dbResponse:', dbResponse);
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('.put POOL error:', error);
+        res.sendStatus(500);
+    })
+});
 
 // DELETE
 

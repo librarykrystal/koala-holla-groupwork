@@ -12,6 +12,7 @@ $( document ).ready( function(){
 }); // end doc ready
 
 function setupClickListeners() {
+  $( '#viewKoalas' ).on( 'click', '.transferBtn', transferUpdate);
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
     // get user input and put in an object
@@ -25,8 +26,23 @@ function setupClickListeners() {
       notes: $("#notesIn").val(),
     };
     // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
+  saveKoala( koalaToSend );
   }); 
+}
+
+function transferUpdate(){
+      // console.log('f completeIt TEST');
+      const id = $(this).parent().parent().data('id');
+      console.log('transferUpdate THIS ID:', id);
+      $.ajax({
+          type: 'PUT',
+          url: `/koala.router/ready_to_transfer/${id}`,
+          data: {ready_to_transfer: 'true'}
+      }).then(function() {
+          getKoalas();
+      }).catch(function(error) {
+          console.log('transferUpdate ajax PUT ERROR:', error);
+      })
 }
 
 function getKoalas(){
@@ -34,7 +50,7 @@ function getKoalas(){
   // ajax call to server to get koalas
   $.ajax({
     method: "GET",
-    url: "/koalas",
+    url: "/koala.router",
   })
   .then(function (response){
     console.log("in getKoalas", response);
@@ -50,7 +66,7 @@ function saveKoala( newKoala ){
   // ajax call to server to post koalas
  $.ajax({
   method: "POST",
-  url: "/koalas",
+  url: "/koala.router",
   data: newKoala
  })
  .then (function(response){
@@ -68,7 +84,7 @@ function appendKoalas(array){
     for (let i = 0; i < array.length; i++) {
       if(array[i].ready_to_transfer == false){
           $('#viewKoalas').append(`
-          <tr>
+          <tr data-id=${array[i].id}>
           <td>${array[i].name}</td>
           <td>${array[i].age}</td>
           <td>${array[i].gender}</td>
@@ -80,7 +96,7 @@ function appendKoalas(array){
       `)
       } else {
       $('#viewKoalas').append(`
-      <tr>
+      <tr data-id=${array[i].id}>
       <td>${array[i].name}</td>
       <td>${array[i].age}</td>
       <td>${array[i].gender}</td>
