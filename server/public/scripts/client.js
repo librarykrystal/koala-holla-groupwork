@@ -92,6 +92,7 @@ function appendKoalas(array){
             <button class="transferBtn">Mark Ready for Transfer</button>
           </td>
           <td>${array[i].notes}</td>
+          <td><button class="deleteBtn">Delete</button></td>
           </tr>
       `)
       } else {
@@ -102,6 +103,7 @@ function appendKoalas(array){
       <td>${array[i].gender}</td>
       <td>${array[i].ready_to_transfer}</td>
       <td>${array[i].notes}</td>
+      <td><button class="deleteBtn">Delete</button></td>
       </tr>
       `)}
   }
