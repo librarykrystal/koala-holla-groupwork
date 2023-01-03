@@ -42,7 +42,7 @@ function transferUpdate(){
       console.log('transferUpdate THIS ID:', id);
       $.ajax({
           type: 'PUT',
-          url: `/koala.router/ready_to_transfer/${id}`,
+          url: `/koalas/ready_to_transfer/${id}`,
           data: {ready_to_transfer: 'true'}
       }).then(function() {
           getKoalas();
@@ -56,7 +56,7 @@ function getKoalas(){
   // ajax call to server to get koalas
   $.ajax({
     method: "GET",
-    url: "/koala.router",
+    url: "/koalas",
   })
   .then(function (response){
     console.log("in getKoalas", response);
@@ -72,7 +72,7 @@ function saveKoala( newKoala ){
   // ajax call to server to post koalas
  $.ajax({
   method: "POST",
-  url: "/koala.router",
+  url: "/koalas",
   data: newKoala
  })
  .then (function(response){
@@ -121,7 +121,7 @@ function deleteKoala(){
 console.log(id);
   $.ajax({
     type: "DELETE",
-    url: `/koala.router/${id}`,
+    url: `/koalas/${id}`,
   })
     .then(function () {
       getKoalas();
