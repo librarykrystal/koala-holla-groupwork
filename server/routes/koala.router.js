@@ -67,6 +67,21 @@ router.put('/ready_to_transfer/:id', (req, res) => {
 });
 
 // DELETE
+router.delete("/:id", (req, res) =>{
+    console.log("hello from delete");
+    const queryText=`DELETE from "koalas" WHERE id = ${req.params.id};`;
+  pool
+    .query(queryText)
+    .then((result) => {
+      console.log(result);
+      res.sendStatus(202);
+    })
+    .catch((error) => {
+      console.log("error making query", error);
+      res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;
 

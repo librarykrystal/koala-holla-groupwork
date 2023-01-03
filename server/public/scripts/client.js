@@ -13,11 +13,15 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#viewKoalas' ).on( 'click', '.transferBtn', transferUpdate);
+  $( '#viewKoalas' ).on( 'click', '.deleteBtn', deleteKoala);
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
+    if ($("#nameIn").val() == "" || $("#readyForTransferIn").val() == "") {
+      alert("Please fill in Name and Transfer Status");
+    } else {
     let koalaToSend = {
       name: $("#nameIn").val(),
       age: $("#ageIn").val(),
@@ -27,7 +31,9 @@ function setupClickListeners() {
     };
     // call saveKoala with the new obejct
   saveKoala( koalaToSend );
-  }); 
+  }
+}); 
+  $('#nameIn').val('');
 }
 
 function transferUpdate(){
@@ -107,4 +113,20 @@ function appendKoalas(array){
       </tr>
       `)}
   }
+}
+
+function deleteKoala(){
+  console.log("deleteKoala firing off");
+  const id = $(this).parent().parent().data('id');
+console.log(id);
+  $.ajax({
+    type: "DELETE",
+    url: `/koala.router/${id}`,
+  })
+    .then(function () {
+      getKoalas();
+    })
+    .catch(function (error) {
+      console.log("error with deleting,", error);
+    });
 }
